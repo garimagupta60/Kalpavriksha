@@ -3,7 +3,7 @@
 #include <stdlib.h>
 typedef struct User{
     int id;
-    char name[50];
+    char name[20];
     int age;
     struct User* next;
 }User;
@@ -51,7 +51,7 @@ void loadUserFromFile(){
     }
     int id, age;
     char name[50];
-    while (fscanf(fp, "%d,%49[^,],%d", &id, name, &age) != EOF) {
+    while (fscanf(fp, "%d,%19[^,],%d", &id, name, &age) != EOF) {
         User* newUser = createUserNode(id, name, age);
         insertUserSorted(newUser);
     }
