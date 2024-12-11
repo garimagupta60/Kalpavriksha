@@ -50,7 +50,7 @@ void loadUserFromFile(){
         return;
     }
     int id, age;
-    char name[50];
+    char name[20];
     while (fscanf(fp, "%d,%19[^,],%d", &id, name, &age) != EOF) {
         User* newUser = createUserNode(id, name, age);
         insertUserSorted(newUser);
@@ -79,12 +79,12 @@ void saveUsersToFile() {
 
 void Create() {
     int id, age;
-    char name[50];
+    char name[20];
     printf("Enter ID: ");
     scanf("%d", &id);
     printf("Enter Name: ");
     getchar();
-    fgets(name, 50, stdin);
+    fgets(name, 20, stdin);
     name[strcspn(name, "\n")] = '\0';
     printf("Enter Age: ");
     scanf("%d", &age);
@@ -120,7 +120,7 @@ void Update() {
     }
     printf("Enter new name: ");
     getchar();              //while (getchar() != '\n'); can also write this to keep consuming enter after prev scanf so that fgets work properly 
-    fgets(user->name, 50, stdin);   //fgets Reads input until a newline is encountered or the buffer size is reached
+    fgets(user->name, 20, stdin);   //fgets Reads input until a newline is encountered or the buffer size is reached
     user->name[strcspn(user->name, "\n")] = '\0';
     printf("Enter new age: ");
     scanf("%d", &user->age);
