@@ -45,7 +45,7 @@ void insertUserSorted(User* newUser) {
 void loadUserFromFile(){
     FILE *fp = fopen("users.txt","r");
     if(fp == NULL){
-        fp = fopen("users.txt", "a");       //open the file in append mode to create it if file nhi h so fopen return NULL
+        fp = fopen("users.txt", "a");       
         fclose(fp);
         return;
     }
@@ -119,8 +119,8 @@ void Update() {
         return;
     }
     printf("Enter new name: ");
-    getchar();              //while (getchar() != '\n'); can also write this to keep consuming enter after prev scanf so that fgets work properly 
-    fgets(user->name, 20, stdin);   //fgets Reads input until a newline is encountered or the buffer size is reached
+    getchar();             
+    fgets(user->name, 20, stdin);   
     user->name[strcspn(user->name, "\n")] = '\0';
     printf("Enter new age: ");
     scanf("%d", &user->age);
