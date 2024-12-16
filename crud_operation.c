@@ -11,13 +11,33 @@ typedef struct User{
 User* head = NULL;
 
 User* createUserNode(int id, char* name, int age) {
+    int typeCheckError = 0;
     User* newUser = (User*)malloc(sizeof(User));
+    if (id <= 0) {  
+        printf("Error: ID must be positive.\n");
+        typeCheckError = 1;
+    }
+    if (age <= 0) {  
+        printf("Error: age must be positive.\n");
+        typeCheckError = 1;
+    }
     newUser->id = id;
+    if (name == NULL || strlen(name) == 0 || strlen(name) >= 20) {
+        printf("Error: Invalid name.\n");
+        typeCheckError = 1;
+    }
+    if(typeCheckError)return NULL;
     strcpy(newUser->name, name);
     newUser->age = age;
     newUser->next = NULL;
+    if (newUser == NULL) {  
+        printf("Error: Memory allocation failed.\n");
+        return NULL;
+    }
+
     return newUser;
 }
+
 
 User* findUserById(int id) {
     User* current = head;
@@ -114,14 +134,23 @@ void Update() {
     int id;
     printf("Enter ID to update: ");
     scanf("%d", &id);
+    if (id <= 0) {
+        printf("Error: ID must be positive.\n");
+        return;
+    }
     User* user = findUserById(id);
     if (user == NULL) {
+        printf("Error: User with ID %d not found.\n", id);
         return;
     }
     printf("Enter new name: ");
     getchar();             
     fgets(user->name, 20, stdin);   
     user->name[strcspn(user->name, "\n")] = '\0';
+    if (strlen(user->name) == 0) {
+        printf("Error: Name cannot be empty or NULL.\n");
+        return;
+    }
     printf("Enter new age: ");
     scanf("%d", &user->age);
     printf("User updated successfully!\n");
@@ -164,10 +193,10 @@ int main(){
         printf("Enter your choice: ");
         scanf("%d", &choice);
         switch (choice){
-            case 1:Create();break;
-            case 2:Read();break;
-            case 3:Update();break;
-            case 4:Delete();break;
+            case 1:Create();saveUsersToFile();break;
+            case 2:Read();saveUsersToFile();break;
+            case 3:Update();saveUsersToFile();break;
+            case 4:Delete();saveUsersToFile();break;
             case 5:saveUsersToFile();
                 printf("Exiting...\n");
                 exit(0);
