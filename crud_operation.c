@@ -191,7 +191,12 @@ int main(){
         printf("4. Delete\n");
         printf("5. Exit\n");
         printf("Enter your choice: ");
-        scanf("%d", &choice);
+        if (scanf("%d", &choice) != 1) {
+            while (getchar() != '\n');
+            printf("Invalid input. Please enter a number between 1 and 5.\n");
+            continue;
+        }
+
         switch (choice){
             case 1:Create();saveUsersToFile();break;
             case 2:Read();saveUsersToFile();break;
