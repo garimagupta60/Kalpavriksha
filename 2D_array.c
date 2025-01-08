@@ -52,7 +52,7 @@ int main(){
     printf("\nThe longest name:\n");
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
-            if(is_vowel(to_lower_case(student_name[i][j][0])){ 
+            if(is_vowel(to_lower_case(student_name[i][j][0]))){ 
                 if (len(student_name[i][j])==maxlength)
                     printf("%s\n",student_name[i][j]);
             }
