@@ -48,6 +48,10 @@ void insertintohashmap(int key, int value){
         node* current = hashtable->array[index];
         node* prev = NULL;
         while(current!=NULL){
+            if(current->key == key){
+                current->value = value;
+                return;
+            }
             prev = current;
             current = current->next;
         }
